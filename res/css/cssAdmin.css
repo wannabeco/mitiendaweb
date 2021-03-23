@@ -1,0 +1,7 @@
+/*#modalProd{width: 80%;}
+@media only screen and (max-width:768px)
+{
+    #modalProd{width: 94% !important;}
+}*/
+.ocultaPorVariacion{display:none;}
+.ocultaPorNoVariacion{display:none;}
