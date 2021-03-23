@@ -385,14 +385,14 @@ function sendSms($remitente,$destinatario,$mensaje)
     // load library
     $ci->load->library('Nexmo');
     // set response format: xml or json, default json
-    $ci->nexmo->set_format('json');
+    $ci->Nexmo->set_format('json');
 
     $from = $remitente;
     $to   = $destinatario;
     $message = array(
         'text' => $mensaje,
     );
-    $response = $ci->nexmo->send_message($from, $to, $message);
+    $response = $ci->Nexmo->send_message($from, $to, $message);
     // echo "<h1>Text Message</h1>";
     // $ci->nexmo->d_print($response);
     // echo "<h3>Response Code: ".$ci->nexmo->get_http_status()."</h3>";
