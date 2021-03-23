@@ -8,7 +8,7 @@
  * Date: 2011-11-07
  */
 
-class nexmo
+class Nexmo
 {
     // using https by default
     const http_xml_url = 'https://rest.nexmo.com/sms/xml';
