@@ -383,7 +383,7 @@ function sendSms($remitente,$destinatario,$mensaje)
     $ci = get_instance();
     //cargo las librer'ias de los SMS
     // load library
-    $ci->load->library('nexmo');
+    $ci->load->library('Nexmo');
     // set response format: xml or json, default json
     $ci->nexmo->set_format('json');
 
