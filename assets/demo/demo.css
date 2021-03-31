@@ -351,6 +351,7 @@
   .elCaja{width: 80%}
   .ocultoEnMovil{display:none;}
   .navbar-collapse{background: red !important }
+.ocultoEnPc{display:block;}
 
   .btn,
   .btn-morphing {
