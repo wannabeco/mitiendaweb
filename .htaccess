@@ -1,13 +1,13 @@
 #RewriteEngine On
 
-#RewriteCond %{SERVER_PORT} 80
-#RewriteRule ^(.*)$ https://www.tucomunidad.co/$1 [R,L]
-
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteRule ^(.*)$ index.php/$1 [L,QSA]
-
 RewriteEngine On 
 RewriteCond %{REQUEST_FILENAME} !-f 
 RewriteCond %{REQUEST_FILENAME} !-d 
 RewriteRule ^(.*)$ index.php?/$1 [L]
+
+
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} !^www\.pedidoscolombia\.com$
+RewriteCond %{HTTP_HOST} ([^.]+)\.pedidoscolombia\.com$
+RewriteRule (.*) Inicio/validaSubdominio/%1/$1 [QSA]

@@ -68,5 +68,19 @@ class Inicio extends CI_Controller
 		$salida['modulos']    = $this->logica->getModulos(1);
 		echo $this->load->view("app/menu",$salida,true);
 	}
+	public function validaSubdominio($subdominio,$parametro)
+	{
+		echo $subdominio." - ".$parametro;
+		// if (!empty($_GET['dato1'])) {
+		//    $ficha = $_GET['dato1'];
+		//    echo 'Estamos en el subdominio '.$ficha;
+		//    if (!empty($_GET['dato2'])) {
+		//       $contenidoficha = $_GET['dato2'];
+		//       echo 'Contenido'.$contenidoficha.' del subdominio '.$ficha;
+		//    }
+		// } else {
+		// echo 'No es un subdominio';
+		// }
+	}
 }
 ?>

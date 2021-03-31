@@ -7,7 +7,7 @@
  * Author: Bo-Yi Wu <appleboy.tw@gmail.com>
  * Date: 2011-11-07
  */
-
+//ajuste
 class Nexmo
 {
     // using https by default
