@@ -29,7 +29,7 @@ $claseColor = 'info';
 <body class="index-page sidebar-collapse" id="paginaCompleta" ng-controller="paginaController" ng-init="initPagina()">
 
 
-<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -50,10 +50,121 @@ $claseColor = 'info';
         </div>
         
       </div>
-      <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
+   
+    </div>
+  </div>
+</div> -->
+
+
+
+<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><strong>INICIA SESIÓN</strong></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Inicia sesión en la plataforma para poder realizar pedidos y calificar los productos. Si aún no estás registrado puedes crear una nueva cuenta.</p><br>
+        
+         <form action="" method="post">
+          <div class="form-group">
+            <label for="email"><strong>Correo electrónico:</strong></label>
+            <input type="email" class="form-control" id="usuario" placeholder="Escribe tu cuenta de correo electrónico">
+          </div>
+          <div class="form-group">
+            <label for="pwd"><strong>Contraseña:</strong></label>
+            <input type="password" class="form-control" id="clave" placeholder="Escribe tu clave de acceso">
+          </div>
+          <!-- <div class="checkbox">
+            <label><input type="checkbox"> Recuerdame</label>
+          </div> -->
+          <button type="button" ng-click="procesoLogin()" class="btn btn-<?php echo $claseColor?> btn-block"><strong>INGRESAR</strong></button> <br>
+          ¿Eres nuevo? no te preocupes, puedes  crear una cuenta gratis<br>
+          <a data-toggle="modal" data-target="#modalRegistro"  class="btn btn-default btn-block text-white"><strong>CREAR CUENTA</strong></a>
+        </form> 
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="modalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><strong>REGISTRO DE NUEVO USUARIO</strong></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Ingresa la información a continuación para crear tu usuario.</p><br>
+        
+         <form action="" method="post">
+          <div class="row">
+            <div class="col col-lg-6">
+              <div class="form-group">
+                <label for="email"><strong>Nombre:</strong></label>
+                <input type="email" class="form-control" id="nombre" placeholder="Escribe tu nombre">
+              </div>
+            </div>
+            <div class="col col-lg-6">
+              <div class="form-group">
+                <label for="pwd"><strong>Apellido:</strong></label>
+                <input type="text" class="form-control" id="apellido" placeholder="Escribe tu apellido">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col col-lg-6">
+               <div class="form-group">
+                <label for="email"><strong>Correo electrónico:</strong></label>
+                <input type="email" class="form-control" id="email" placeholder="Este será tu usuario de acceso">
+              </div>
+            </div>
+            <div class="col col-lg-6">
+               <div class="form-group">
+                  <label for="celular"><strong>Número de celular:</strong></label>
+                  <input type="email" class="form-control" id="celular" placeholder="Ingresa tu número de celular">
+                </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col col-lg-6">
+               <div class="form-group">
+                <label for="clave"><strong>Contraseña:</strong></label>
+                <input type="password" class="form-control" id="claver" placeholder="Escribe tu clave de acceso">
+              </div>
+            </div>
+            <div class="col col-lg-6">
+               <div class="form-group">
+                  <label for="rclave"><strong>Repite tu contraseña:</strong></label>
+                  <input type="password" class="form-control" id="rclave" placeholder="Vuelve a escribir la contraseña">
+                </div>
+            </div>
+          </div>
+         
+
+          
+
+          
+          <!-- <div class="checkbox">
+            <label><input type="checkbox"> Recuerdame</label>
+          </div> -->
+          <button type="button" ng-click="procesoRegistro()" class="btn btn-<?php echo $claseColor?> btn-block"><strong>REGISTRARME GRATIS</strong></button>
+        </form> 
+        
+      </div>
     </div>
   </div>
 </div>
@@ -115,7 +226,7 @@ $claseColor = 'info';
         <div class="row"  ng-if="productosCarrito.length != 0">
           <div class="col-lg-12  col-md-12 col-xs-12 col-md-12">
             <div class="form-group">
-                <h5 class="modal-title" id="selEnvio"><strong>FORMA DE ENVÍO</strong></h5>
+                <h5 class="modal-title"><strong>FORMA DE ENVÍO</strong></h5>
                 <select name="selEnvio" id="selEnvio" class="form-control" onchange="cambiaEnvio(this)">
                     <option value="1">RECOGER EN TIENDA</option>
                     <option value="2">ENVIARLO A MI DIRECCIÓN</option>
@@ -124,13 +235,13 @@ $claseColor = 'info';
           </div>
           <div class="col-lg-12  col-md-12 col-xs-12 col-md-12" id="cajaDir" style="display:none">
             <div class="form-group">
-                <h5 class="modal-title" id="direccion"><strong>DIRECCIÓN</strong></h5>
+                <h5 class="modal-title"><strong>DIRECCIÓN</strong></h5>
                 <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Escribe la dirección donde quieres que te entreguen el pedido" />
             </div>
           </div>
           <div class="col-lg-12  col-md-12 col-xs-12 col-md-12">
             <div class="form-group">
-                <h5 class="modal-title" id="formaPago"><strong>FORMA DE PAGO</strong></h5>
+                <h5 class="modal-title"><strong>FORMA DE PAGO</strong></h5>
                 <select name="formaPago" id="formaPago" class="form-control" >
                     <option value="1">TARJETA DE CRÉDITO</option>
                     <option value="2">TARJETA DÉBITO</option>
@@ -161,8 +272,6 @@ $claseColor = 'info';
 
 
 
-<div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v10.0&appId=451969922682583&autoLogAppEvents=1" nonce="Kh313daN"></script>
 
  <!-- pie movil con la infro del carrito-->
   <nav class="navbar navbar-expand-lg bg-dark d-sm-block d-lg-none" style="position: fixed;bottom:0;z-index: 200;width: 100%;margin:0;border-radius: 0">
@@ -204,15 +313,15 @@ $claseColor = 'info';
                         <span class="badge badge-danger cantCarro">{{cantCarrito}}</span>
                     </a>
                 </li>
-                <li class="nav-item" ng-if="logueado == 0">
+                <li class="nav-item" ng-if="login == 0 || login == null">
                     <a data-toggle="modal" data-target="#modalLogin" class="nav-link"  style="cursor:pointer"><strong><i class="material-icons">account_circle</i> INGRESAR</strong></a>
                 </li>
 
-                <li class="dropdown nav-item" ng-if="logueado == 1">
+                <li class="dropdown nav-item" ng-if="login == 1">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                         <i class="material-icons">account_circle</i>
                         <!-- <img src="{{infoUsuario.foto}}" style="width: 20px;border-radius: 50%;margin:0 5px 0 0 "> -->
-                        {{infoUsuario.nombre}} 
+                        {{infoUsuario.nombre}} {{infoUsuario.apellido}} 
                     </a>
                     <div class="dropdown-menu dropdown-with-icons">
                         <a  style="cursor: pointer" ng-click="cerrarSession()" class="dropdown-item">

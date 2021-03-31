@@ -68,5 +68,6 @@ class Inicio extends CI_Controller
 		$salida['modulos']    = $this->logica->getModulos(1);
 		echo $this->load->view("app/menu",$salida,true);
 	}
+
 }
 ?>

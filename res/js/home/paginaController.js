@@ -12,7 +12,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
     $scope.disableSubca = true;
     $scope.botonesLogin = true;
     $scope.infoUsuario  = true;
-    $scope.logueado     = 0;
+    $scope.login = 0;
     $scope.cantCarrito  = 0;
     //para paginar
     $scope.currentPage = 1;
@@ -31,9 +31,10 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
 		$scope.config = configLogin;
 		//$scope.getPedidosHome();
         $scope.leerCategorias();
-        setTimeout(function(){
-            $scope.leerCarrito();    
-        },4000);
+        $scope.iniciarLogueo();
+        // setTimeout(function(){
+        //     $scope.leerCarrito();    
+        // },4000);
         
 	}
 	
@@ -41,35 +42,136 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
     {
         setTimeout(function(){
             ////console.log("Entro aca también");
-            var dataLogin = $scope.getDataLogin();
-            $scope.logueado    = localStorage.getItem('logueado')
+            var dataLogin      = $scope.getDataLogin();
+            var login       = localStorage.getItem('login');
+            $scope.login    = login;
             $scope.infoUsuario = dataLogin;
-            //console.log(dataLogin);
-            //console.log($scope.logueado);
-            $scope.$digest();
+            $scope.$apply();
+            // console.log(dataLogin);
+            // console.log($scope.login);
             $scope.leerCarrito();
             $("#modalLogin").modal("hide");
-        },2000);
+        },500);
         
+    }
+    $scope.procesoRegistro = function()
+    {
+        var nombre      = $("#nombre").val();
+        var apellido    = $("#apellido").val();
+        var email       = $("#email").val();
+        var celular     = $("#celular").val();
+        var clave       = $("#claver").val();
+        var rclave      = $("#rclave").val();
+
+        if(nombre == "")
+        {
+            constantes.alerta("Atención","Debes escribir tu nombre","info",function(){});
+        }
+        else if(apellido == "")
+        {
+            constantes.alerta("Atención","Debes escribir tu apellido","info",function(){});
+        }
+        else if(email == "")
+        {
+            constantes.alerta("Atención","Debes escribir tu correo electrónico","info",function(){});
+        }
+        else if(email != "" && !constantes.validaMail(email))
+        {
+            constantes.alerta("Atención","El correo electrónico ingresado no es válido","info",function(){});
+        }
+        else if(celular == "")
+        {
+            constantes.alerta("Atención","Es importante escribir tu número de celular, ya que es el medio por el cual las tiendas se comunicarán contigo","info",function(){});
+        }
+        else if(clave == "")
+        {
+            constantes.alerta("Atención","Debes asignar una contraseña","info",function(){});
+        } 
+        else if(rclave == "")
+        {
+            constantes.alerta("Atención","Debes volver a escribir tu contraseña","info",function(){});
+        }
+        else if(rclave != "" && clave != rclave)
+        {
+            constantes.alerta("Atención","Las contraseñas no coinciden, por favor verifica","info",function(){});
+        }
+        else
+        {
+            constantes.confirmacion("Atención","Estás a punto de crear un usuario con los datos ingresdos, ¿Deseas continuar?","info",function(){
+                var controlador = $scope.config.apiUrl+"Api/registroUsuarios";
+                var parametros  = {nombre:nombre,apellido:apellido,email:email,celular:celular,rclave:rclave,terminos:1,movil:'movil'};
+                constantes.consultaApi(controlador,parametros,function(json){
+                    if(json.continuar == 1)
+                    {
+                        constantes.alerta("Atención",json.mensaje,"success",function(){
+                            $("#modalRegistro").modal("hide");
+                        });
+                    }
+                    else
+                    {
+                        constantes.alerta("Atención",json.mensaje,"error",function(){});
+                    }
+                },'json');
+            });
+        }
+
+
+    }
+    $scope.procesoLogin = function()
+    {
+        var usuario = $("#usuario").val();
+        var clave = $("#clave").val();
+        if(usuario == "")
+        {
+            constantes.alerta("Atención","Debes escribir tu correo electrónico","info",function(){});
+        }
+        else if(usuario != "" && !constantes.validaMail(usuario))
+        {
+            constantes.alerta("Atención","El correo electrónico ingresado no es válido","info",function(){});
+        }
+        else if(clave == "")
+        {
+            constantes.alerta("Atención","Debes ingresar tu contraseña","info",function(){});
+        }
+        else
+        {
+            var controlador = $scope.config.apiUrl+"Api/Login";
+            var parametros  = {username:usuario,contrasena:clave,movil:'movil'};
+            constantes.consultaApi(controlador,parametros,function(json){
+                if(json.continuar == 1)
+                {
+                    localStorage.setItem('dataLogin', JSON.stringify(json.datos));
+                    localStorage.setItem('login', 1);
+                    $scope.iniciarLogueo();
+                    $("#modalLogin").modal("hide");
+                }
+                else
+                {
+
+                    constantes.alerta("Atención",json.mensaje,"error",function(){});
+                }
+            },'json');
+        }
     }
     $scope.cerrarSession = function()
     {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
+        constantes.confirmacion("Atención","Estás a punto de cerrar la sesión, ¿deseas continuar?","info",function(){
+            localStorage.setItem('dataLogin', JSON.stringify({}));
+            localStorage.setItem('login', 0);
             location.reload();
         });
     }
 
     $scope.likes = function(idProducto)
     {
-        if($scope.logueado == 0)//abro el modal de logueo
+        if($scope.login == 0)//abro el modal de logueo
         {
             $("#modalLogin").modal({show:true});
         }
         else //proceso el like
         {
             var controlador = $scope.config.apiUrl+"Home/procesaLike";
-            var parametros  = {idProducto:idProducto,idUsuario:$scope.infoUsuario.id,idTienda:$scope.config.infoTienda.idTienda};
+            var parametros  = {idProducto:idProducto,idUsuario:$scope.infoUsuario.idPersona,idTienda:$scope.config.infoTienda.idTienda};
             constantes.consultaApi(controlador,parametros,function(json){
                 if(json.continuar == 1)
                 {
@@ -246,7 +348,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
 
     $scope.agregarCarrito = function(idProducto)
     {
-        if($scope.logueado == 0)//abro el modal de logueo
+        if($scope.login == 0)//abro el modal de logueo
         {
             $("#modalLogin").modal({show:true});
         }
@@ -254,7 +356,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
         {
             var variacion = $("#selVar"+idProducto).val();
             var controlador = $scope.config.apiUrl+"Home/agregarCarrito";
-            var parametros  = {idUsuario:$scope.infoUsuario.id,idProducto:idProducto,proveedor:$scope.infoUsuario.tipoLogin,idTienda:$scope.config.infoTienda.idTienda,variacion:variacion};
+            var parametros  = {idUsuario:$scope.infoUsuario.idPersona,idProducto:idProducto,proveedor:"ApiWeb",idTienda:$scope.config.infoTienda.idTienda,variacion:variacion};
             constantes.consultaApi(controlador,parametros,function(json){
                 if(json.continuar == 1)
                 {
@@ -272,7 +374,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
     {
         constantes.confirmacion("Confirmación","¿Está seguro que desea eliminar este producto de su carrito de pedido?",'info',function(){
             var controlador = $scope.config.apiUrl+"Home/quitarDelCarrito";
-            var parametros  = {idUsuario:$scope.infoUsuario.id,idRelacion:idRelacion,proveedor:$scope.infoUsuario.tipoLogin,idTienda:$scope.config.infoTienda.idTienda};
+            var parametros  = {idUsuario:$scope.infoUsuario.idPersona,idRelacion:idRelacion,proveedor:"ApiWeb",idTienda:$scope.config.infoTienda.idTienda};
             constantes.consultaApi(controlador,parametros,function(json){
                 swal.close()
                 $scope.toast(json.mensaje,"success");
@@ -284,7 +386,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
     $scope.leerCarrito = function()
     {
         var controlador = $scope.config.apiUrl+"Home/leerCarrito";
-        var parametros  = {idUsuario:$scope.infoUsuario.id,proveedor:$scope.infoUsuario.tipoLogin,idTienda:$scope.config.infoTienda.idTienda};
+        var parametros  = {idUsuario:$scope.infoUsuario.idPersona,proveedor:"ApiWeb",idTienda:$scope.config.infoTienda.idTienda};
         //console.dir(parametros);
         constantes.consultaApi(controlador,parametros,function(json){
             $scope.productosCarrito = json.datos;
@@ -301,7 +403,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
         {
             $scope.productosCarrito[index].cantidad = parseInt($scope.productosCarrito[index].cantidad) - parseInt(1);
             var controlador = $scope.config.apiUrl+"Home/modificarCantidad";
-            var parametros  = {idUsuario:$scope.infoUsuario.id,cantidad:$scope.productosCarrito[index].cantidad,idRelacion:idRelacion,proveedor:$scope.infoUsuario.tipoLogin,idTienda:$scope.config.infoTienda.idTienda};
+            var parametros  = {idUsuario:$scope.infoUsuario.idPersona,cantidad:$scope.productosCarrito[index].cantidad,idRelacion:idRelacion,proveedor:"ApiWeb",idTienda:$scope.config.infoTienda.idTienda};
             constantes.consultaApi(controlador,parametros,function(json){},'json');
             $scope.calculaTotalPedido();
         }
@@ -310,7 +412,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
     {
         $scope.productosCarrito[index].cantidad = parseInt($scope.productosCarrito[index].cantidad) + parseInt(1);
         var controlador = $scope.config.apiUrl+"Home/modificarCantidad";
-        var parametros  = {idUsuario:$scope.infoUsuario.id,cantidad:$scope.productosCarrito[index].cantidad,idRelacion:idRelacion,proveedor:$scope.infoUsuario.tipoLogin,idTienda:$scope.config.infoTienda.idTienda};
+        var parametros  = {idUsuario:$scope.infoUsuario.idPersona,cantidad:$scope.productosCarrito[index].cantidad,idRelacion:idRelacion,proveedor:"ApiWeb",idTienda:$scope.config.infoTienda.idTienda};
         constantes.consultaApi(controlador,parametros,function(json){},'json');
         $scope.calculaTotalPedido();
     }
@@ -329,31 +431,40 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
         var formaPago   = $("#formaPago").val();
         var formaEnvio  = $("#selEnvio").val();
         var direccion   = $("#direccion").val();
-        alert(formaEnvio);
-        if($scope.logueado == 0)//abro el modal de logueo
+        if($scope.login == 0)//abro el modal de logueo
         {
             $("#modalLogin").modal({show:true});
         }
         else if(formaEnvio == 2 && direccion == "")
         {
-            constantes.alerta("Debe escribir la direccion donde desea que le envíen el pedido","info",function(){});
+            constantes.alerta("Atención","Debe escribir la direccion donde deseas que te envien el pedido","info",function(){});
         }
         else //proceso el like
         {
             constantes.confirmacion("Confirmación","Esta a punto de realizar un pedido con los productos agregados, ¿Desea continuar?","info",function(){
                 //https://api.whatsapp.com/send/?phone=573114881738&text=Hola%2C+quisiera+hacer+un+pedido.%0A%0AQuiero+que+me+lo+env%C3%ADen+a%3A+Calle+falsa+123%0A%0ANombre%3A+Farez+Prieto%0A%0A--------------------------------%0A%0AP%C3%A1gina+web+econ%C3%B3mica+x+1+.+COP50000%0ACosto+de+env%C3%ADo+............+COP1%0A%0A--------------------------------%0A%0ATotal%3A+................+COP50001&app_absent=0
-                var mensaje  = "Hola, mi nombre es "+$scope.infoUsuario.nombre+"%0A%0A";
+                var mensaje  = "Hola, mi nombre es "+$scope.infoUsuario.nombre+" "+$scope.infoUsuario.apellido+"%0A%0A";
                     mensaje += "Quisiera hacer un pedido con los siguientes productos.%0A%0A";
+                    var totalPedido = 0;
                     for(var a in $scope.productosCarrito)
                     {
+                        var valorCantidad = ($scope.productosCarrito[a].valorPresentacion * $scope.productosCarrito[a].cantidad);
                         mensaje += $scope.productosCarrito[a].nombrePresentacion+"%0A";
                         mensaje += $scope.productosCarrito[a].nombreVariacion+"%0A";
-                        mensaje += "$"+($scope.productosCarrito[a].valorPresentacion * $scope.productosCarrito[a].cantidad)+"%0A";
                         mensaje += "Cantidad: "+$scope.productosCarrito[a].cantidad+"%0A";
-                        mensaje += "----------------------------------------------%0A";
+                        mensaje += "Valor unitario: $"+constantes.number_format($scope.productosCarrito[a].valorPresentacion,0,',','.')+"%0A";
+                        mensaje += "Valor total $"+constantes.number_format(valorCantidad,0,',','.')+"%0A";
+                        mensaje += "----------------------------------------------%0A%0A";
+                        totalPedido += valorCantidad;
                     }
+                    mensaje += "*TOTAL PEDIDO:* $"+constantes.number_format(totalPedido,0,',','.')+"%0A%0A";
+
                     mensaje += "Forma de pago: "+$scope.calculaFormaPago(formaPago)+"%0A";
                     mensaje += "Forma de envío: "+$scope.calculaFormaEnvio(formaEnvio)+"%0A";
+                    if(formaEnvio == 2)
+                    {
+                        mensaje += "*Dirección:* "+direccion+"%0A";   
+                    }
                     mensaje += "%0A%0A";
                     mensaje += "Muchas gracias!.";
                     console.log(mensaje);
@@ -398,6 +509,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
         {
             salida = "ENVIAR A MI DIRECCIÓN";
         }
+        return salida;
     }
 
    // setTimeout(function(){
