@@ -279,8 +279,7 @@ class Api extends CI_Controller
             $post['apto']               = "";
 			$post['aceptaTerminos'] 	= $terminos;
 			//busco la foto con la palabra que envien
-			$logueo = $this->logicaReg->insertaPersona($post);
-			echo json_encode($logueo);
+			$respuesta = $this->logicaReg->insertaPersona($post);
 		}
 		else
 		{
@@ -288,8 +287,8 @@ class Api extends CI_Controller
                               "continuar"=>0,
                               "datos"=>""); 
 
-            echo json_encode($respuesta); 
 		}
+        echo json_encode($respuesta); 
     }
 
     /*

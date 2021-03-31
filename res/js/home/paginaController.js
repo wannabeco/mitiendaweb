@@ -11,7 +11,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
     $scope.subcategoria = "";
     $scope.disableSubca = true;
     $scope.botonesLogin = true;
-    $scope.infoUsuario  = true;
+    $scope.infoUsuario  ={};
     $scope.login = 0;
     $scope.cantCarrito  = 0;
     //para paginar
@@ -49,7 +49,11 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
             $scope.$apply();
             // console.log(dataLogin);
             // console.log($scope.login);
-            $scope.leerCarrito();
+            if($scope.login == 1)
+            {
+                $scope.leerCarrito();
+            }
+
             $("#modalLogin").modal("hide");
         },500);
         
@@ -348,7 +352,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
 
     $scope.agregarCarrito = function(idProducto)
     {
-        if($scope.login == 0)//abro el modal de logueo
+        if($scope.login == 0 || $scope.login == null)//abro el modal de logueo
         {
             $("#modalLogin").modal({show:true});
         }

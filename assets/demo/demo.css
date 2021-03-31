@@ -337,16 +337,20 @@
 .mostrar{display: inline}
 .ocultar{display: none}
 
+.ocultoEnMovil{display:block;}
+
 @media (max-width: 768px) {
 
   .tituloPrincipal{margin:0 !important;padding:0 !important;font-size:2.0em;text-align:center;font-weight: 900;}
   .infoTienda{margin:0 !important;padding:0 !important;font-size:1.0em;text-align:center}
   .tituloCatalogo{font-size:1.5em;font-weight: 900;text-align:center !important}
-  .seccion{padding:20px 0}
+  .seccion{padding:20px 0;margin:20px 0 0 0;}
   .page-header{height: 50vh !important;}
   .logo{width: 20% !important;}
   .selectCategoria{float:left !important;width: 100%;}
   .elCaja{width: 80%}
+  .ocultoEnMovil{display:none;}
+  .navbar-collapse{background: red !important }
 
   .btn,
   .btn-morphing {

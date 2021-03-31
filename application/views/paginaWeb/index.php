@@ -12,8 +12,7 @@ $claseColor = 'info';
   <title>
     <?php echo $infoTienda['nombreTienda'] ?>
   </title>
-  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-  <meta name="google-signin-client_id" content="33041979845-cglrtjrh3vrk111kllpg3glqek9s43mg.apps.googleusercontent.com">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
@@ -27,35 +26,6 @@ $claseColor = 'info';
 </head>
 
 <body class="index-page sidebar-collapse" id="paginaCompleta" ng-controller="paginaController" ng-init="initPagina()">
-
-
-<!-- <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"><strong>INICIA SESIÓN</strong></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Hola, para poder realizar pedidos o dar "Me gusta" a los productos debes identificarte primero. <br><br>Selecciona una cuenta de tu preferencia.</p><br>
-        <div class="row">
-          <div class="col col-lg-4 col-md-4 col-sm-4 col-xs-4">
-              <div class="g-signin2" data-width="100%" data-onsuccess="onSignIn"></div> &nbsp;
-          </div>
-          <div class="col col-lg-8 col-md-8 col-sm-8 col-xs-8">
-              <div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
-          </div>
-        </div>
-        
-      </div>
-   
-    </div>
-  </div>
-</div> -->
-
-
 
 <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -274,12 +244,12 @@ $claseColor = 'info';
 
 
  <!-- pie movil con la infro del carrito-->
-  <nav class="navbar navbar-expand-lg bg-dark d-sm-block d-lg-none" style="position: fixed;bottom:0;z-index: 200;width: 100%;margin:0;border-radius: 0">
+<!--   <nav class="navbar navbar-expand-lg bg-dark d-sm-block d-lg-none" style="position: fixed;bottom:0;z-index: 200;width: 100%;margin:0;border-radius: 0">
     <a data-toggle="modal" data-target="#modalCarro" class="nav-link linkCarroMovil">
         <i class="material-icons">shopping_cart</i>
         <span class="badge badge-danger cantCarroM">{{cantCarrito}}</span>
     </a>
-  </nav>
+  </nav> -->
 
 
     <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
@@ -288,6 +258,17 @@ $claseColor = 'info';
             <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit/index.html">
               <span class="d-sm-block d-lg-none"><strong><?php echo $infoTienda['nombreTienda'] ?></strong></span>
             </a>
+
+            <!-- boton de login en movil-->
+            <!-- <a style="margin:0 0 0 150px" class="d-sm-block d-lg-none">
+                <i class="material-icons">account_circle</i>
+            </a> -->
+
+            <a data-toggle="modal" data-target="#modalCarro" class="nav-link linkCarroMovil"  style="margin:0 0 0 100px">
+                <i class="material-icons">shopping_cart</i>
+                <span class="badge badge-danger cantCarroM">{{cantCarrito}}</span>
+            </a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon"></span>
@@ -297,38 +278,45 @@ $claseColor = 'info';
         </div>
         <div class="collapse navbar-collapse">
 
-           <!--  <form class="form-inline ">
-              <div class="form-group has-white">
-                <input type="text" class="form-control" placeholder="Buscar productos en <?php echo $infoTienda['nombreTienda'] ?>">
-              </div>
-              <button type="submit" class="btn btn-white btn-raised btn-fab btn-round">
-                <i class="material-icons">search</i>
-              </button>
-            </form> -->
-
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item d-lg-block d-sm-none ocultoEnMovil">
                     <a data-toggle="modal" data-target="#modalCarro" class="nav-link">
                         <i class="material-icons">shopping_cart</i>
                         <span class="badge badge-danger cantCarro">{{cantCarrito}}</span>
                     </a>
                 </li>
-                <li class="nav-item" ng-if="login == 0 || login == null">
+                <li class="nav-item d-lg-block d-sm-none ocultoEnMovil" ng-if="login == 0 || login == null">
                     <a data-toggle="modal" data-target="#modalLogin" class="nav-link"  style="cursor:pointer"><strong><i class="material-icons">account_circle</i> INGRESAR</strong></a>
                 </li>
 
-                <li class="dropdown nav-item" ng-if="login == 1">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                <li class="dropdown nav-item d-lg-block d-sm-none ocultoEnMovil" ng-if="login == 1">
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" class=" d-lg-block d-sm-none">
                         <i class="material-icons">account_circle</i>
                         <!-- <img src="{{infoUsuario.foto}}" style="width: 20px;border-radius: 50%;margin:0 5px 0 0 "> -->
                         {{infoUsuario.nombre}} {{infoUsuario.apellido}} 
                     </a>
-                    <div class="dropdown-menu dropdown-with-icons">
+                    <div class="dropdown-menu dropdown-with-icons d-lg-block d-sm-none">
                         <a  style="cursor: pointer" ng-click="cerrarSession()" class="dropdown-item">
                             <i class="fa fa-sign-out"></i> Cerrar sesión
                         </a>
                     </div>
                 </li>
+
+                <li style="padding:20px;color:#333" class="d-sm-block d-lg-none"  ng-if="login == 1"><br><br>
+                  <center><i class="material-icons" style="font-size:80px ">account_circle</i></center>
+                  <h5 class="text-center" style="padding:0;margin:0"><strong> {{infoUsuario.nombre}} {{infoUsuario.apellido}}</strong></h5>
+                  <h6 class="text-center" style="padding:0;margin:0;text-transform: lowercase;">{{infoUsuario.email}}</h6><br>
+                  <button class="btn btn-<?php echo $claseColor?> btn-block" ng-click="cerrarSession()">CERRAR SESIÓN</button>
+                </li>
+
+                <li style="padding:20px;color:#333;text-align: center" class="d-sm-block d-lg-none"  ng-if="login == 0"><BR><BR>
+                  <h5><strong>BIENVENIDO</strong></h5>
+                  <p>Si ya estás registrado</p>
+                  <button class="btn btn-<?php echo $claseColor?> btn-block" data-toggle="modal" data-target="#modalLogin">INICIA SESIÓN</button><br> 
+                  <p>Si eres nuevo usuario</p>
+                  <button class="btn btn-clear btn-block" data-toggle="modal" data-target="#modalRegistro">CREAR CUENTA</button>
+                </li>
+
             </ul>
         </div>
         </div>
