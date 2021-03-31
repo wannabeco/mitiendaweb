@@ -264,7 +264,7 @@ $claseColor = 'info';
                 <i class="material-icons">account_circle</i>
             </a> -->
 
-            <a data-toggle="modal" data-target="#modalCarro" class="nav-link linkCarroMovil ocultoEnMovil"  style="margin:0 0 0 50px">
+            <a data-toggle="modal" data-target="#modalCarro" class="nav-link linkCarroMovil ocultoEnPc"  style="margin:0 0 0 50px">
                 <i class="material-icons">shopping_cart</i>
                 <span class="badge badge-danger cantCarroM">{{cantCarrito}}</span>
             </a>
