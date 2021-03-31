@@ -24,9 +24,18 @@ class Inicio extends CI_Controller
 	public function index()	
 	{
 		//aca debo validar el dominio que esta cargando arriba.
-		//die($_SERVER["HTTP_HOST"]);
-		//aca lo primero que debo hacer es subir a session la data de la tienda visitda para consultar todo con ese idTienda
-		$infoTienda = $this->logicaHome->getInfoTienda($_SERVER["HTTP_HOST"]);
+		die($_SERVER["HTTP_HOST"]);
+		//las tiendas ya no llevaran subdominio.
+		//valido si el dominio es pedidoscolombia.com
+		if($_SERVER["HTTP_HOST"] == 'pedidoscolombia.com')
+		{
+			$infoTienda = $this->logicaHome->getInfoTienda($_SERVER["HTTP_HOST"]);
+		}
+		else
+		{
+			$infoTienda = $this->logicaHome->getInfoTienda($_SERVER["HTTP_HOST"]);
+		}
+
 		if(count($infoTienda['datos']) > 0)
 		{
 			//subo los datos a session
@@ -67,20 +76,6 @@ class Inicio extends CI_Controller
 		$salida['opc']    	  = "";
 		$salida['modulos']    = $this->logica->getModulos(1);
 		echo $this->load->view("app/menu",$salida,true);
-	}
-	public function validaSubdominio($subdominio,$parametro)
-	{
-		echo $subdominio." - ".$parametro;
-		// if (!empty($_GET['dato1'])) {
-		//    $ficha = $_GET['dato1'];
-		//    echo 'Estamos en el subdominio '.$ficha;
-		//    if (!empty($_GET['dato2'])) {
-		//       $contenidoficha = $_GET['dato2'];
-		//       echo 'Contenido'.$contenidoficha.' del subdominio '.$ficha;
-		//    }
-		// } else {
-		// echo 'No es un subdominio';
-		// }
 	}
 }
 ?>
