@@ -289,7 +289,7 @@ $claseColor = 'info';
                     <a data-toggle="modal" data-target="#modalLogin" class="nav-link"  style="cursor:pointer"><strong><i class="material-icons">account_circle</i> INGRESAR</strong></a>
                 </li>
 
-                <li class="dropdown nav-item d-lg-block d-sm-none ocultoEnMovil" ng-if="login == 0 || $scope.login == null">
+                <li class="dropdown nav-item d-lg-block d-sm-none ocultoEnMovil" ng-if="login == 0 || login == null">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" class=" d-lg-block d-sm-none">
                         <i class="material-icons">account_circle</i>
                         <!-- <img src="{{infoUsuario.foto}}" style="width: 20px;border-radius: 50%;margin:0 5px 0 0 "> -->
