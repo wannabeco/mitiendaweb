@@ -101,7 +101,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
         }
         else
         {
-            constantes.confirmacion("Atención","Estás a punto de crear un usuario con los datos ingresdos, ¿Deseas continuar?","info",function(){
+            constantes.confirmacion("Atención","Estás a punto de crear un usuario con los datos ingresados, ¿Deseas continuar?","info",function(){
                 var controlador = $scope.config.apiUrl+"Api/registroUsuarios";
                 var parametros  = {nombre:nombre,apellido:apellido,email:email,celular:celular,rclave:rclave,terminos:1,movil:'movil'};
                 constantes.consultaApi(controlador,parametros,function(json){
@@ -168,7 +168,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
 
     $scope.likes = function(idProducto)
     {
-        if($scope.login == 0)//abro el modal de logueo
+        if($scope.login == 0 || $scope.login == null)//abro el modal de logueo
         {
             $("#modalLogin").modal({show:true});
         }
@@ -435,7 +435,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
         var formaPago   = $("#formaPago").val();
         var formaEnvio  = $("#selEnvio").val();
         var direccion   = $("#direccion").val();
-        if($scope.login == 0)//abro el modal de logueo
+        if($scope.login == 0 || $scope.login == null)//abro el modal de logueo
         {
             $("#modalLogin").modal({show:true});
         }
@@ -467,7 +467,7 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
                     mensaje += "Forma de envío: "+$scope.calculaFormaEnvio(formaEnvio)+"%0A";
                     if(formaEnvio == 2)
                     {
-                        mensaje += "*Dirección:* "+direccion+"%0A";   
+                        mensaje += "Dirección: "+direccion+"%0A";   
                     }
                     mensaje += "%0A%0A";
                     mensaje += "Muchas gracias!.";

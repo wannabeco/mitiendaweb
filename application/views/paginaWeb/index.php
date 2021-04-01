@@ -255,7 +255,7 @@ $claseColor = 'info';
     <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
         <div class="container">
         <div class="navbar-translate">
-            <a class="navbar-brand" href="https://demos.creative-tim.com/material-kit/index.html">
+            <a class="navbar-brand" href="#">
               <span class="d-sm-block d-lg-none"><strong><?php echo $infoTienda['nombreTienda'] ?></strong></span>
             </a>
 
@@ -289,7 +289,7 @@ $claseColor = 'info';
                     <a data-toggle="modal" data-target="#modalLogin" class="nav-link"  style="cursor:pointer"><strong><i class="material-icons">account_circle</i> INGRESAR</strong></a>
                 </li>
 
-                <li class="dropdown nav-item d-lg-block d-sm-none ocultoEnMovil" ng-if="login == 1">
+                <li class="dropdown nav-item d-lg-block d-sm-none ocultoEnMovil" ng-if="login == 0 || $scope.login == null">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" class=" d-lg-block d-sm-none">
                         <i class="material-icons">account_circle</i>
                         <!-- <img src="{{infoUsuario.foto}}" style="width: 20px;border-radius: 50%;margin:0 5px 0 0 "> -->
@@ -309,7 +309,7 @@ $claseColor = 'info';
                   <button class="btn btn-<?php echo $claseColor?> btn-block" ng-click="cerrarSession()">CERRAR SESIÓN</button>
                 </li>
 
-                <li style="padding:20px;color:#333;text-align: center" class="d-sm-block d-lg-none"  ng-if="login == 0"><BR><BR>
+                <li style="padding:20px;color:#333;text-align: center" class="d-sm-block d-lg-none"  ng-if="login == 0"><br><br>
                   <h5><strong>BIENVENIDO</strong></h5>
                   <p>Si ya estás registrado</p>
                   <button class="btn btn-<?php echo $claseColor?> btn-block" data-toggle="modal" data-target="#modalLogin">INICIA SESIÓN</button><br> 
