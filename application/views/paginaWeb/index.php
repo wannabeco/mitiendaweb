@@ -286,10 +286,10 @@ $claseColor = 'info';
                     </a>
                 </li>
                 <li class="nav-item d-lg-block d-sm-none ocultoEnMovil" ng-if="login == 0 || login == null">
-                    <a data-toggle="modal" data-target="#modalLogin" class="nav-link"  style="cursor:pointer"><strong><i class="material-icons">account_circle</i> INGRESAR</strong></a>
+                    <a data-toggle="modal" data-target="#modalLogin" class="nav-link"  style="cursor:pointer"><strong><i class="material-icons">account_circle</i> INGRESAR {{login}}</strong></a>
                 </li>
 
-                <li class="dropdown nav-item d-lg-block d-sm-none ocultoEnMovil" ng-if="login == 0 || login == null">
+                <li class="dropdown nav-item d-lg-block d-sm-none ocultoEnMovil" ng-if="login == 1">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" class=" d-lg-block d-sm-none">
                         <i class="material-icons">account_circle</i>
                         <!-- <img src="{{infoUsuario.foto}}" style="width: 20px;border-radius: 50%;margin:0 5px 0 0 "> -->
@@ -309,7 +309,7 @@ $claseColor = 'info';
                   <button class="btn btn-<?php echo $claseColor?> btn-block" ng-click="cerrarSession()">CERRAR SESIÓN</button>
                 </li>
 
-                <li style="padding:20px;color:#333;text-align: center" class="d-sm-block d-lg-none"  ng-if="login == 0"><br><br>
+                <li style="padding:20px;color:#333;text-align: center" class="d-sm-block d-lg-none"  ng-if="login == 0 || login == null"><br><br>
                   <h5><strong>BIENVENIDO</strong></h5>
                   <p>Si ya estás registrado</p>
                   <button class="btn btn-<?php echo $claseColor?> btn-block" data-toggle="modal" data-target="#modalLogin">INICIA SESIÓN</button><br> 
