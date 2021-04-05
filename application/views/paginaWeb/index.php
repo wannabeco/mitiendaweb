@@ -281,7 +281,7 @@ $claseColor = 'info';
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item d-lg-block d-sm-none ocultoEnMovil">
                     <a data-toggle="modal" data-target="#modalCarro" class="nav-link">
-                        <i class="material-icons">shopping_cart</i>
+                        <i class="material-icons" style="cursor:pointer">shopping_cart</i>
                         <span class="badge badge-danger cantCarro">{{cantCarrito}}</span>
                     </a>
                 </li>
