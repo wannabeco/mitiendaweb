@@ -6,3 +6,4 @@ application/config/**
 *.DS_STORE
 *.csv
 res/CajaMenuda/**
+.htaccess

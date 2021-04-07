@@ -199,6 +199,24 @@ class LogicaGeneral  {
         }
         return $respuesta;
     }
+    public function consultatiendas($where=array())
+    {
+        $conjuntos = $this->ci->dbGeneral->consultatiendas($where);
+        if(count($conjuntos) > 0)
+        {
+            $respuesta = array("mensaje"=>"Listado de tiendas",
+                              "continuar"=>1,
+                              "datos"=>$conjuntos);            
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"No existen tiendas",
+                              "continuar"=>0,
+                              "datos"=>"");    
+
+        }
+        return $respuesta;
+    }
     public function getPresentacionesProductoVendedor($where_in=array(),$campo='')
     {
         $presentaciones = $this->ci->dbGeneral->getPresentacionesProductoVendedor($where_in,$campo);

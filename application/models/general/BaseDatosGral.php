@@ -59,6 +59,7 @@ class BaseDatosGral extends CI_Model {
         $this->tableEstadosPedido        = "app_estado_pedido";
         $this->tableCiudadesVentas       = "app_ciudades_venta";
         $this->tableConjuntos            = "app_conjuntos";
+        $this->tableTiendas              = "app_tiendas";
         $this->tablePresentaciones       = "app_presentacion_producto";
         $this->tableLogin                = "app_login";
         $this->tableRelConjuntoVendedora = "app_rel_conjunto_vendedora";
@@ -229,14 +230,26 @@ class BaseDatosGral extends CI_Model {
         //print_r($this->db->last_query());die();
         return $id->result_array();
     }
-    public function consultaConjuntos($where = array())
+    public function consultaConjuntos($where=array())
     {
         $this->db->select("*");
-        if(count($where > 0))
+        if(count($where)  > 0)
         {
             $this->db->where($where);
         }
         $this->db->from($this->tableConjuntos);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    } 
+    public function consultatiendas($where=array())
+    {
+        $this->db->select("*");
+        if(count($where)  > 0)
+        {
+            $this->db->where($where);
+        }
+        $this->db->from($this->tableTiendas);
         $id = $this->db->get();
         //print_r($this->db->last_query());die();
         return $id->result_array();

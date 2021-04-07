@@ -1218,7 +1218,7 @@ class Parametrizacion extends CI_Controller
 						$crud->display_as('faviconTienda','Ícono de la tienda <small>200px X 200px</small>');
 						$crud->display_as('nombreTienda','Nombre de la tienda');
 						$crud->columns('nombreTienda','dominioTienda');
-						$crud->unset_texteditor('direccionTienda','nombreTienda','dominioTienda','correoTienda','celularTienda','urlFacebook','urlTwitter','urlInstagram','urlLinkedin','faviconTienda');
+						$crud->unset_texteditor('direccionTienda','nombreTienda','dominioTienda','correoTienda','celularTienda','urlFacebook','subdominio','urlTwitter','urlInstagram','urlLinkedin','faviconTienda');
 						$crud->unset_clone();
 						
 						$output = $crud->render();

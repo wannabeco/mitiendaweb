@@ -49,15 +49,16 @@ class LogicaHome  {
     {
         if($url != "")
         {
-            $where['dominioTienda'] = $url;
+            //$where['dominioTienda'] = $url;
+            $resultado = $this->ci->dbHome->getInfoTiendaLike($url);
         }
 
         if($idTienda != "")
         {
             $where['idTienda'] = $idTienda;
+            $resultado = $this->ci->dbHome->getInfoTienda($where);
         }
 
-        $resultado = $this->ci->dbHome->getInfoTienda($where);
         if(count($resultado) > 0)
         {
             $salida = array("mensaje"=>"Info de la tienda",

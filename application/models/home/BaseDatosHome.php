@@ -77,6 +77,16 @@ class BaseDatosHome extends CI_Model {
         //print_r($this->db->last_query());die();
         return $id->result_array();
     }
+    public function getInfoTiendaLike($url="")
+    {
+        $this->db->select("*");
+        //$this->db->where(arra);
+        $this->db->like('dominioTienda',$url);
+        $this->db->from($this->tableTiendas);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+    }
     public function getCategorias($where="")
     {
         $this->db->select("*");

@@ -282,8 +282,20 @@
             
 
             <div  class="col col-lg-6">
+            <div class="form-group label-floating">
+                <label class="control-label" for="id_app_cesantias">Tienda</label>
+                <select tabindex="22"  id="idTienda" name="idTienda" class="form-control">
+                    <option value=""></option>
+                    <?php foreach($selects['tiendas'] as $tiendas){ ?>
+                        <option value="<?php echo $tiendas['idTienda'] ?>" <?php echo (isset($datos['idTienda']) && $tiendas['idTienda'] == $datos['idTienda'])?'selected':''; ?>><?php echo $tiendas['nombreTienda'] ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+          </div>
+
+            <div  class="col col-lg-6">
                 <?php if($edita == 1){ ?>
-                  <div class="form-group  label-floating"">
+                  <div class="form-group  label-floating">
                     <label class="control-label" for="estado">Estado del usuario</label>
                     <select tabindex="26" class=" form-control" id="estado" name="estado">
                       <option value="1" <?php if($datos['estadoU'] == 1){?>selected<?php }?>>Activo</option>

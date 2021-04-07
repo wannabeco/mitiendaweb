@@ -11,7 +11,7 @@
 *  @version 1.0
 */
 
-$lang['titulo'] = "Wannabe Shop";
+$lang['titulo'] = "Pedidos Colombia";
 $lang['tituloLogin'] = "Bienvenido";
 
 $lang['reg_btn_crea']			= "Crear";

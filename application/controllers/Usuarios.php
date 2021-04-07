@@ -107,6 +107,7 @@ class Usuarios extends CI_Controller
 		$afp 	 	 	 	 = $this->logica->consultaAFP(); 
 		$cesantias 	 	 	 = $this->logica->consultaCesantias(); 
 		$conjuntos			 = $this->logica->consultaConjuntos();
+		$tiendas			 = $this->logica->consultatiendas();
 		$subdis			 	 = $this->logica->getPersonasPorPerfil(_PERFIL_ADMIN_VENTAS);
 		$vend			 	 = $this->logica->getPersonasPorPerfil(_PERFIL_VENDEDOR);
 		//var_dump($conjuntos);
@@ -124,6 +125,7 @@ class Usuarios extends CI_Controller
 									  "subdis"=>$subdis,
 									  "vend"=>$vend,
 									  "conjuntos"=>$conjuntos['datos'],
+									  "tiendas"=>$tiendas['datos'],
 									  "cesantias"=>$cesantias);
 		if($edita == 1)
 		{
