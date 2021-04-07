@@ -313,14 +313,14 @@ project.controller('gestionTienda', function($scope,$http,$q,constantes,$compile
 		{
 			constantes.alerta("Atención","Escriba una descripción corta para el producto","info",function(){});
 		}
-		else if(variacion == undefined || variacion == "")
+		/*else if(variacion == undefined || variacion == "")
 		{
 			constantes.alerta("Atención","Indique si el producto tiene variación o no","info",function(){});
 		}
 		else if(variacion == 0 && valorPresentacion == "")
 		{
 			constantes.alerta("Atención","Escriba el precio de venta del producto","info",function(){});
-		}
+		}*/
 		else
 		{
 			var mensajeConfirma = (edita == 1)?"Está a punto de modificar la información del producto, ¿Desea continuar?":"Está a punto de crear un nuevo producto, ¿Desea continuar?";

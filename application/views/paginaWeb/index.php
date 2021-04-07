@@ -434,12 +434,14 @@ $claseColor = 'info';
                             <span class="valorAntes" ng-if="dataVar[$index].valorAnterior > 0"> Antes: {{dataVar[$index].valorAnterior | currency:"$":0}}</span>
                         </h4>
                         <p class="card-text parrafoTextoProducto">{{prod.descripcionCorta | limitTo : 110}}<span ng-if="prod.descripcionCorta.length > 110">...</span></p>
-                        <select class="form-control text-center" id="selVar{{prod.idPresentacion}}" data-index="{{$index}}" rel="{{prod.idPresentacion}}" onchange="cambiaVariacion(this)">
-                            <option ng-repeat="vari in prod.variaciones" value="{{vari.idVariacion}}">{{vari.nombreVariacion}}</option>
-                        </select><br>
-                        <a class="text-white btn btn-<?php echo $claseColor?>" ng-if="prod.agotado == 'No' " ng-click="agregarCarrito(prod.idPresentacion)"><i class="material-icons">shopping_cart</i> Añadir al carrito</a>
-                        <button class="text-white btn btn-default" ng-if="prod.agotado == 'Si' " disabled>PRODUCTO AGOTADO</button>
-                        <a class="text-white btn btn-<?php echo $claseColor?>" style="padding-left:15px !important;padding-right:15px !important;" ng-click="likes(prod.idPresentacion)"><i class="material-icons">favorite</i> {{procesaLikes(prod.likes)}}</a>
+                        <span ng-if="prod.variaciones.length != 0">
+                          <select class="form-control text-center" id="selVar{{prod.idPresentacion}}" data-index="{{$index}}" rel="{{prod.idPresentacion}}" onchange="cambiaVariacion(this)">
+                              <option ng-repeat="vari in prod.variaciones" value="{{vari.idVariacion}}">{{vari.nombreVariacion}}</option>
+                          </select><br>
+                          <a class="text-white btn btn-<?php echo $claseColor?>" ng-if="prod.agotado == 'No' " ng-click="agregarCarrito(prod.idPresentacion)"><i class="material-icons">shopping_cart</i> Añadir al carrito</a>
+                          <button class="text-white btn btn-default" ng-if="prod.agotado == 'Si' " disabled>PRODUCTO AGOTADO</button>
+                          <a class="text-white btn btn-<?php echo $claseColor?>" style="padding-left:15px !important;padding-right:15px !important;" ng-click="likes(prod.idPresentacion)"><i class="material-icons">favorite</i> {{procesaLikes(prod.likes)}}</a>
+                        </span>
                     </div>
                 </div>
             </div>  

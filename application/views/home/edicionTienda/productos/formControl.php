@@ -110,7 +110,7 @@
                  </div>
                </div>
                
-               <div class="row">
+               <!-- <div class="row">
                   <div class="col col-lg-12 col-md-12"><br>
                     <h4><strong>¿El producto tiene variación? *</strong></h4>
                     <p>La variación de un producto es cuando este tiene color, talla, peso, tamaño y estos tienen valor diferente. Active esta casita si el producto lo tiene.</p>
@@ -121,7 +121,7 @@
 
                       <input tabindex="2" autocomplete="off" ng-click="activaVariacion()" id="variacion1" name="variacion" <?php if(isset($datos['variacion']) && $datos['variacion'] == '1'){ echo "checked"; }?> type="radio" value="1"> <label for="variacion1">SI</label>
                  </div>
-              </div>
+              </div> -->
 
                <div class="row ocultaPorVariacion">
                 <div class="col col-lg-12 col-md-12">
@@ -181,7 +181,7 @@
   <?php if($edita == 1){?>
     $(document).ready(function(){
       angular.element(document.getElementById('formulario')).scope().buscarSubCategorias('<?php echo $datos['idSubcategoria']?>');
-      angular.element(document.getElementById('formulario')).scope().activaVariacion();
+      //angular.element(document.getElementById('formulario')).scope().activaVariacion();
     });
   <?php }?>
   function buscarSubCategorias(id)

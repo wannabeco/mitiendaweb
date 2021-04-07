@@ -134,8 +134,8 @@ class BaseDatosHome extends CI_Model {
         $this->db->join($this->tableSubCategorias." s","s.idSubcategoria=p.idSubcategoria and p.idProducto=s.idProducto","INNER");
 
 
-        $this->db->order_by("nuevo","ASC");
-        $this->db->order_by("likes","DESC");
+        $this->db->order_by("idPresentacion","DESC");
+        //$this->db->order_by("likes","DESC");
         $id = $this->db->get();
         //print_r($this->db->last_query());die();
         return $id->result_array();
