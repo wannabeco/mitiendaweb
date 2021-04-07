@@ -19,7 +19,7 @@
                         </strong>
                     </a>
                 <?php }else{?>
-                    <a class="navbar-brand" href="<?php echo base_url() ?>" style="text-transform: capitalize">
+                    <a class="navbar-brand" href="<?php echo base_url() ?>App" style="text-transform: capitalize">
                          <strong>
                             <img src="<?php echo base_url() ?>res/img/favicon.png" width="7%" style="border-radius:50%" alt="Icono Wannabe.com.co"> 
                             <?php echo lang("titulo")?> / Administración general
