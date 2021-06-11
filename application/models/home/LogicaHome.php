@@ -507,6 +507,7 @@ class LogicaHome  {
         if($edita == 0)//agrega
         {
             unset($post['edita']);
+            unset($post['fotoActual']);
             $post['nombrePresentacion'] = mb_strtoupper($post['nombrePresentacion']);
             $resultado = $this->ci->dbHome->agregaProducto($post);
             if(count($resultado) > 0)
