@@ -521,8 +521,10 @@ $claseColor = 'info';
         &copy;
         <script>
           document.write(new Date().getFullYear())
-        </script>, hecha con el <i class="material-icons">favorite</i> por
-        <!--<a href="https://www.wannabe.com.co/" title="Wannabe Digital, Diseño y desarrollo de páginas web y tiendas virtuales." class="text-<?php echo $claseColor?>" target="_blank">Wannabe </a>-->
+        </script>, 
+        
+        <!--hecha con el <i class="material-icons">favorite</i> por
+        <a href="https://www.wannabe.com.co/" title="Wannabe Digital, Diseño y desarrollo de páginas web y tiendas virtuales." class="text-<?php echo $claseColor?>" target="_blank">Wannabe </a>-->
 
         ¿Te gustaría una tienda de pedidos como esta? escríbenos a <a href="mailto:tiendas@pedidoscolombia.com" target="_blank">tiendas@pedidoscolombia.com</a>
 
