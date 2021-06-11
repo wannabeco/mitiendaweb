@@ -510,7 +510,7 @@ class LogicaHome  {
             unset($post['fotoActual']);
             $post['nombrePresentacion'] = mb_strtoupper($post['nombrePresentacion']);
             $resultado = $this->ci->dbHome->agregaProducto($post);
-            if(count($resultado) > 0)
+            if($resultado > 0)
             {
                 $salida = array("mensaje"=>"El producto se ha agregado de manera correcta",
                                 "datos"=>$resultado,
@@ -531,7 +531,7 @@ class LogicaHome  {
             $where['idPresentacion']        = $idPresentacion;
             $post['nombrePresentacion']     = mb_strtoupper($nombrePresentacion);
             $resultado = $this->ci->dbHome->actualizaProducto($where,$post);
-            if(count($resultado) > 0)
+            if($resultado > 0)
             {
                 $salida = array("mensaje"=>"Producto actualizado de manera exitosa",
                                 "datos"=>$resultado,
