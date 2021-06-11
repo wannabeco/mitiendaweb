@@ -96,6 +96,8 @@
                       </div>
                    </div>
                  </div>
+               <?php }else{?>
+                  <input type="hidden" name="fotoActual"  value="">
                <?php }?>
                <div class="row">
                  <div class="col col-lg-12 col-md-12">

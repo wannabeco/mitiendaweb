@@ -325,6 +325,7 @@ class GestionTienda extends CI_Controller
 			$where['idTienda']   = $_SESSION['project']['info']['idTienda'];
 		}
 		$where['idProducto']   = $categoria;
+		$where['idEstado']     = 1;
 
 		$listaSubcat = $this->logicaHome->getSubcategorias($where);
 		$salida["data"] 	 	= $listaSubcat['datos'];
