@@ -597,7 +597,7 @@ class LogicaHome  {
             $dataInsertar['idPresentacion']     = $post['idPresentacion'];
             $dataInsertar['idTienda']           = $post['idTienda'];
             $resultado = $this->ci->dbHome->agregaVariacion($dataInsertar);
-            if($resultado)> 0)
+            if($resultado > 0)
             {
                 $salida = array("mensaje"=>"Categoría creada de manera exitosa",
                                 "datos"=>$resultado,
