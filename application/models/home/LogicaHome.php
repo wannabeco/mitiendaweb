@@ -467,7 +467,7 @@ class LogicaHome  {
     {
         $dataActualiza['idEstado'] = 0;
         $resultado = $this->ci->dbHome->actualizaSubCategoria($post,$dataActualiza);
-        if(count($resultado) > 0)
+        if($resultado > 0)
         {
             $salida = array("mensaje"=>"La subcategoría se ha eliminado exitosamente",
                             "datos"=>$resultado,
