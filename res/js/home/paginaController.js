@@ -529,6 +529,23 @@ project.controller('paginaController', function($scope,$http,$q,constantes)
    //      })
    // },2000);
     
+    
+
+});
 
 
+project.controller('crearController', function($scope,$http,$q,constantes)
+{
+    $scope.initCrear = function()
+    {
+        console.log("crear");
+    }
+    //código para las pestañas de la página
+    $scope.cambiaPestana = function(p)
+    {
+        $(".nav-item").addClass("disabled")
+        $(".nav-item").removeClass("active")
+        $(p).removeClass("disabled")
+        $(p).addClass("active")
+    }
 });

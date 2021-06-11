@@ -43,6 +43,50 @@ class Inicio extends CI_Controller
 			$this->load->view("paginaWeb/tiendaNoExiste",$salida);
 		}
 	}
+	public function indexTest($nombreTienda="")	
+	{
+		$salida['titulo'] = "Pedidos Colombia";
+		$salida['centro'] = "";
+		$this->load->view("paginaWeb/paginaPrincipal",$salida);
+	}
+	public function crearTienda()	
+	{
+		$salida['titulo'] = "Crear nueva tienda";
+		$salida['centro'] = "";
+		$this->load->view("paginaWeb/crearTienda",$salida);
+	}
+
+	public function tiendas($nombreTienda="")
+	{
+		//aca debo validar el dominio que esta cargando arriba.
+		//die($_SERVER["HTTP_HOST"]);
+		//aca lo primero que debo hacer es subir a session la data de la tienda visitda para consultar todo con ese idTienda
+		if($nombreTienda != "")
+		{
+			$infoTienda = $this->logicaHome->getInfoTienda("","",$nombreTienda);
+		}
+		else
+		{
+			$infoTienda = $this->logicaHome->getInfoTienda($_SERVER["HTTP_HOST"]);
+		}
+		//reviso la info de la tienda
+		if(count($infoTienda['datos']) > 0)
+		{
+			//subo los datos a session
+			$_SESSION['tiendaVisitada'] = $infoTienda['datos'][0];
+			$salida['titulo'] = "";
+			$salida['centro'] = "";
+			$salida['infoTienda'] = $infoTienda['datos'][0];
+			$this->load->view("paginaWeb/index",$salida);
+		}
+		else
+		{
+			$salida['titulo'] = "";
+			$salida['centro'] = "";
+			$this->load->view("paginaWeb/tiendaNoExiste",$salida);
+		}
+	}
+
 	public function homeEmpresa()
 	{
 		

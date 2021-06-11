@@ -52,3 +52,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Inicio';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+$route['tiendas/(:any)'] = 'Inicio/tiendas/$1';
+$route['crearTienda'] = 'Inicio/crearTienda/';

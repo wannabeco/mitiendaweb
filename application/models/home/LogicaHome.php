@@ -45,7 +45,7 @@ class LogicaHome  {
         }
         return $salida;
     }
-    public function getInfoTienda($url="",$idTienda="")
+    public function getInfoTienda($url="",$idTienda="",$urlAmigable="")
     {
         if($url != "")
         {
@@ -56,6 +56,12 @@ class LogicaHome  {
         if($idTienda != "")
         {
             $where['idTienda'] = $idTienda;
+            $resultado = $this->ci->dbHome->getInfoTienda($where);
+        }
+
+        if($urlAmigable != "")
+        {
+            $where['urlAmigable'] = $urlAmigable;
             $resultado = $this->ci->dbHome->getInfoTienda($where);
         }
 
@@ -421,7 +427,7 @@ class LogicaHome  {
             unset($post['edita']);
             $post['nombreSubcategoria'] = mb_strtoupper($post['nombreSubcategoria']);
             $resultado = $this->ci->dbHome->agregaSubCategoria($post);
-            if(count($resultado) > 0)
+            if($resultado > 0)
             {
                 $salida = array("mensaje"=>"Subcategoría creada de manera exitosa",
                                 "datos"=>$resultado,
