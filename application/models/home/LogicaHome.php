@@ -645,7 +645,7 @@ class LogicaHome  {
         $where['idPresentacion']        = $idPresentacion;
         $where['idTienda']              = $idTienda;
         $resultado = $this->ci->dbHome->actualizaProducto($where,$dataActualiza);
-        if(count($resultado) > 0)
+        if($resultado > 0)
         {
 
             $dataActualizaV['idEstado']      = 0;
