@@ -343,7 +343,7 @@ class GestionTienda extends CI_Controller
 		extract($_POST);
 		if(isset($_FILES) && $_FILES['fotoPresentacion']['name'] != "")
 		{
-			@mkdir('assets/uploads/files/'.$idTienda,"0777");
+			@mkdir('assets/uploads/files/'.$idTienda,0777);
 
 			$config['upload_path'] 	 = 'assets/uploads/files/'.$idTienda.'/';
 	        $config['allowed_types'] = 'gif|jpg|png';
@@ -358,8 +358,8 @@ class GestionTienda extends CI_Controller
 	        {
 	            $status = 'error';
 	            $msg = $this->upload->display_errors();
-	            var_dump($msg);
-	            $salida = array("mensaje"=>"No se ha podido realizar la carga de la foto de perfil, probablemente la falla sea porque ha superado el tamaño permitido de 2 MB ó no tenga el formato que se necesita: PNG, JPG ó GIF, supere",
+	            //var_dump($msg);
+	            $salida = array("mensaje"=>"No se ha podido realizar la carga de la foto de perfil, probablemente la falla sea porque ha superado el tamaño permitido de 2 MB ó no tenga el formato que se necesita: PNG, JPG ó GIF, supere. ".$msg,
             				"continuar"=>0,
             				"datos"=>array());
 	        }
