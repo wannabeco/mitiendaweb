@@ -597,7 +597,7 @@ class LogicaHome  {
             $dataInsertar['idPresentacion']     = $post['idPresentacion'];
             $dataInsertar['idTienda']           = $post['idTienda'];
             $resultado = $this->ci->dbHome->agregaVariacion($dataInsertar);
-            if(count($resultado) > 0)
+            if($resultado)> 0)
             {
                 $salida = array("mensaje"=>"Categoría creada de manera exitosa",
                                 "datos"=>$resultado,
@@ -622,7 +622,7 @@ class LogicaHome  {
             $dataActualiza['idTienda']           = $post['idTienda'];
 
             $resultado = $this->ci->dbHome->actualizaVariacion($where,$dataActualiza);
-            if(count($resultado) > 0)
+            if($resultado > 0)
             {
                 $salida = array("mensaje"=>"Categoría actualizada de manera exitosa",
                                 "datos"=>$resultado,
@@ -672,7 +672,7 @@ class LogicaHome  {
         $where['idVariacion']           = $idVariacion;
         $where['idTienda']              = $idTienda;
         $resultado = $this->ci->dbHome->actualizaVariacion($where,$dataActualiza);
-        if(count($resultado) > 0)
+        if($resultado > 0)
         {
             //actualio todas las variaciones que tenga el producto
             $salida = array("mensaje"=>"La variacion se ha eliminado de manera corecta",
