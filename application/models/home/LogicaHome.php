@@ -83,7 +83,7 @@ class LogicaHome  {
     {
         $dataActualiza['idEstado'] = 0;
         $resultado = $this->ci->dbHome->actualizaCategoria($post,$dataActualiza);
-        if(count($resultado) > 0)
+        if($resultado > 0)
         {
             $salida = array("mensaje"=>"La categoría se ha eliminado exitosamente",
                             "datos"=>$resultado,
@@ -106,7 +106,7 @@ class LogicaHome  {
             unset($post['idProducto']);
             $post['nombreProducto'] = mb_strtoupper($post['nombreProducto']);
             $resultado = $this->ci->dbHome->agregaCategoria($post);
-            if(count($resultado) > 0)
+            if($resultado > 0)
             {
                 $salida = array("mensaje"=>"Categoría creada de manera exitosa",
                                 "datos"=>$resultado,
@@ -124,7 +124,7 @@ class LogicaHome  {
             $where['idProducto']            = $idProducto;
             $dataActualiza['nombreProducto'] = mb_strtoupper($post['nombreProducto']);
             $resultado = $this->ci->dbHome->actualizaCategoria($where,$dataActualiza);
-            if(count($resultado) > 0)
+            if($resultado > 0)
             {
                 $salida = array("mensaje"=>"Categoría actualizada de manera exitosa",
                                 "datos"=>$resultado,
@@ -446,7 +446,7 @@ class LogicaHome  {
             $dataActualiza['nombreSubcategoria'] = mb_strtoupper($nombreSubcategoria);
             $dataActualiza['idProducto']         = $idProducto;
             $resultado = $this->ci->dbHome->actualizaSubCategoria($where,$dataActualiza);
-            if(count($resultado) > 0)
+            if($resultado > 0)
             {
                 $salida = array("mensaje"=>"Subcategoría actualizada de manera exitosa",
                                 "datos"=>$resultado,
