@@ -15,7 +15,7 @@ $claseColor = 'info';
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
   <?php if($infoTienda['idTienda'] == 3){?>
-    <meta http-equiv="Content-Security-Policy" content="img-src https://www.amacerar.com/ 'self' data:; default-src *; style-src 'self' 'unsafe-inline';script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'">
+    <meta http-equiv="Content-Security-Policy" content="img-src https://www.pedidoscolombia.com/ 'self' data:; default-src *; style-src 'self' 'unsafe-inline';script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'">
   <?php }?>
   
   <!--     Fonts and icons     -->
