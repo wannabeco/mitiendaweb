@@ -13,6 +13,11 @@ $claseColor = 'info';
     <?php echo $infoTienda['nombreTienda'] ?>
   </title>
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+  <?php if($infoTienda['idTienda'] == 3){?>
+    <meta http-equiv="Content-Security-Policy" content="img-src https://www.amacerar.com/ 'self' data:; default-src *; style-src 'self' 'unsafe-inline';script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'">
+  <?php }?>
+  
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
