@@ -902,4 +902,24 @@ class LogicaGeneral  {
         //var_dump($salidaPerf);
         return $salidaPerf;
     }
+    
+    public function getTiposTiendas($where)
+    {
+        $datos = $this->ci->dbGeneral->getTiposTiendas($where);
+        if(count($datos) > 0)
+        {
+            $respuesta = array("mensaje"=>"Listado de tipos de tienda",
+                              "continuar"=>1,
+                              "datos"=>$datos);            
+        }
+        else
+        {
+            $respuesta = array("mensaje"=>"No existen tipos de tienda",
+                              "continuar"=>0,
+                              "datos"=>"");    
+
+        }
+        return $respuesta;
+    }
+ 
  }

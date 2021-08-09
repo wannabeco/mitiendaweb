@@ -69,6 +69,7 @@ class BaseDatosGral extends CI_Model {
         $this->tableNotificaciones       = "app_noti";
         $this->tableSubcategorias       = "app_subproductos";
         $this->tableBanners             = "app_banners";
+        $this->tableTipoTienda             = "app_tipo_tienda";
     }
     public function getVariablesGlobales()
     {
@@ -667,6 +668,20 @@ class BaseDatosGral extends CI_Model {
             $this->db->where($where);
         }
         $this->db->from($this->tableEstadosPedido);
+        $id = $this->db->get();
+        //print_r($this->db->last_query());die();
+        return $id->result_array();
+
+    }
+    public function getTiposTiendas($where=array())
+    {
+        $this->db->select("*");
+        if(count($where) > 0)
+        {
+            $this->db->where($where);
+        }
+        $this->db->from($this->tableTipoTienda);
+        $this->db->order_by("nombreTipoTienda","ASC");
         $id = $this->db->get();
         //print_r($this->db->last_query());die();
         return $id->result_array();

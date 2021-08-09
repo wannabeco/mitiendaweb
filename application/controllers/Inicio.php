@@ -51,8 +51,15 @@ class Inicio extends CI_Controller
 	}
 	public function crearTienda()	
 	{
+		//consulto los tipos de tienda creados
+		$listaTiposTienda =  $this->logica->getTiposTiendas(array("eliminado"=>0));
+		//listado de municipios para el pais 
+		$listaDepartamentos   = $this->logica->getDepartamentos(array("ID_PAIS"=>'057'));
+		$selects = array("tiposTienda"=>$listaTiposTienda['datos'],
+						 "deptos"=>$listaDepartamentos['datos']);
 		$salida['titulo'] = "Crear nueva tienda";
 		$salida['centro'] = "";
+		$salida['selects'] = $selects;
 		$this->load->view("paginaWeb/crearTienda",$salida);
 	}
 
@@ -87,6 +94,36 @@ class Inicio extends CI_Controller
 		}
 	}
 
+	public function registroExitoso($idTienda="")
+	{
+		//aca debo validar el dominio que esta cargando arriba.
+		//die($_SERVER["HTTP_HOST"]);
+		//aca lo primero que debo hacer es subir a session la data de la tienda visitda para consultar todo con ese idTienda
+		if($idTienda != "")
+		{
+			$infoTienda = $this->logicaHome->getInfoTienda("",$idTienda,"");
+			//reviso la info de la tienda
+			if(count($infoTienda['datos']) > 0)
+			{
+				$salida['titulo'] = "Registro exitoso";
+				$salida['centro'] = "";
+				$salida['infoTienda'] = $infoTienda['datos'][0];
+				$this->load->view("paginaWeb/registroExitoso",$salida);
+			}
+			else
+			{
+				$salida['titulo'] = "Registro exitoso";
+				$salida['centro'] = "";
+				$this->load->view("paginaWeb/tiendaNoExiste",$salida);
+			}
+		}
+		else
+		{
+			$this->load->view("paginaWeb/tiendaNoExiste",$salida);
+		}
+		
+	}
+
 	public function homeEmpresa()
 	{
 		
@@ -111,6 +148,12 @@ class Inicio extends CI_Controller
 		$salida['opc']    	  = "";
 		$salida['modulos']    = $this->logica->getModulos(1);
 		echo $this->load->view("app/menu",$salida,true);
+	}
+
+	public function getMunicipios()
+	{
+		$municipios =  $this->logica->getCiudades(array("ID_PAIS"=>"057","ID_DPTO"=>$_POST['idDepartamento']));
+		echo json_encode($municipios);
 	}
 
 }

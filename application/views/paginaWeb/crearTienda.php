@@ -85,7 +85,7 @@ $claseColor = 'info';
     <div class="main main-raised">
         <div class="section section-basic seccion">
             <div class="container">
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data" ng-submit="crearTienda()" id="dataForm">
                     <div class="row">
                         <div class="col-xs-12 ">
                             <h2>Estás a pocos pasos de tener una página de pedidos</h2>
@@ -94,108 +94,97 @@ $claseColor = 'info';
                         <div class="col-xs-12 ">
 
                                 <div id="datos-tienda">
-                                    <h2 class="tituloCatalogo">1. Datos de la tienda</h2>
+                                    <h2 class="tituloCatalogo">1. Datos de la tienda (Obligatorio)</h2>
                                     Completa el formulario a continuación con los datos de contacto de tu tienda. Los campos con el * son obligatorios.<br><br>
                                     <div class="row">
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
-                
-                                                <label for="exampleInputEmail1"><strong>Nombre del negocio *</strong></label>
-                                                <input type="text" style="text-transform:capitalize" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ejemplo: The Cupcakes Store">
-                                                <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+                                            <div class="form-group" id="panel1">
+                                                <label for="nombreTienda"><strong>Nombre del negocio *</strong></label>
+                                                <input type="text" style="text-transform:capitalize" class="form-control" id="nombreTienda" name="nombreTienda" aria-describedby="emailHelp" placeholder="Ejemplo: The Cupcakes Store">
+                                                <small id="emailHelp" class="form-text text-muted">Igual como aparece en el letrero.</small>
                                             </div>
                                         </div>
                                         
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1"><strong>Tipo de negocio *</strong></label>
-                                                <select name="" id="" class="form-control">
+                                            <div class="form-group" id="panel2">
+                                                <label for="idTipoTienda"><strong>Tipo de negocio *</strong></label>
+                                                <select name="idTipoTienda" id="idTipoTienda" class="form-control">
                                                     <option value="">Seleccione...</option>
-                                                    <option value="">Restaurante</option>
-                                                    <option value="">Panadería</option>
-                                                    <option value="">Tienda de mascotas</option>
-                                                    <option value="">Cachivaches</option>
-                                                    <option value="">Carnicería</option>
-                                                    <option value="">Ferretería</option>
-                                                    <option value="">Mini Mercado</option>
-                                                    <option value="">Súper Mercado</option>
-                                                    <option value="">Fruver</option>
-                                                    <option value="">Sexshop</option>
-                                                    <option value="">Papelería</option>
-                                                    <option value="">Productos de aseo</option>
-                                                    <option value="">Productos de belleza</option>
-                                                    <option value="">Pizzería</option>
-                                                    <option value="">Salsamentaria</option>
+                                                    <?php foreach($selects['tiposTienda'] as $tipoTienda){?>
+                                                        <option value="<?php echo $tipoTienda['idTipoTienda']?>"><?php echo strtoupper($tipoTienda['nombreTipoTienda'])?></option>
+                                                    <?php }?>
+                                                    <option value="0">Otro</option>
+
                                                 </select>
                                             </div>
                                         </div>   
 
                                           
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1"><strong>Departamento *</strong></label>
-                                                <select name="" id="" class="form-control">
-                                                    <option value="">Seleccione...</option>
-                                                    <option value="">TOLIMA</option>
-                                                    <option value="">BOYACÁ</option>
+                                            <div class="form-group" id="panel3">
+                                                <label for="idDepartamento"><strong>Departamento *</strong></label>
+                                                <select name="idDepartamento" id="idDepartamento" class="form-control" ng-model="idDepartamento" ng-change="consultaMunicipio()">
+                                                    <option value="">Seleccione...</option
+                                                    <?php foreach($selects['deptos'] as $deptosColombia){?>
+                                                        <option value="<?php echo $deptosColombia['ID_DPTO']?>"><?php echo strtoupper($deptosColombia['NOMBRE'])?></option>
+                                                    <?php }?>
                                                 </select>
                                                 <small id="emailHelp" class="form-text text-muted">Selecciona el departamento donde se ubica tu negocio.</small>
                                             </div>
                                         </div>
                                           
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
+                                            <div class="form-group" id="panel4">
                                                 <label for="exampleInputEmail1"><strong>Municipio *</strong></label>
-                                                <select name="" id="" class="form-control">
+                                                <select name="idCiudad" id="idCiudad" class="form-control" disabled>
                                                     <option value="">Seleccione...</option>
-                                                    <option value="">TOLIMA</option>
-                                                    <option value="">BOYACÁ</option>
+                                                    <option value="{{muni.ID_CIUDAD}}" ng-repeat="muni in municipios">{{muni.NOMBRE}}</option>
                                                 </select>
                                                 <small id="emailHelp" class="form-text text-muted">Selecciona el municipio donde se ubica tu negocio.</small>
                                             </div>
                                         </div>
 
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1"><strong>Dirección física *</strong></label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ejemplo: Calle 37 # 12 - 14">
+                                            <div class="form-group" id="panel5">
+                                                <label for="direccionTienda"><strong>Dirección física *</strong></label>
+                                                <input type="text" class="form-control" id="direccionTienda" name="direccionTienda" aria-describedby="emailHelp" placeholder="Ejemplo: Calle 37 # 12 - 14">
                                                 <small id="emailHelp" class="form-text text-muted">Ayúda a tus clientes a ubicarte.</small>
                                             </div>
                                         </div>
                                         
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1"><strong>Teléfono de contacto *</strong></label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Número de teléfono  de contacto">
+                                            <div class="form-group" id="panel6">
+                                                <label for="telefonoTienda"><strong>Teléfono de contacto *</strong></label>
+                                                <input type="text" class="form-control" id="telefonoTienda" name="telefonoTienda" aria-describedby="emailHelp" placeholder="Celular o fijo">
+                                                <small id="emailHelp" class="form-text text-muted">Esto es para que la gente pueda llamar a su negocio.</small>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col col-lg-6">
+                                            <div class="form-group" id="panel7">
+                                                <label for="correoTienda"><strong>Correo electrónico del negocio *</strong></label>
+                                                <input type="text" class="form-control" id="correoTienda" name="correoTienda" aria-describedby="emailHelp" placeholder="Ejemplo: info@thecupcakesstore.com">
                                                 <!-- <small id="emailHelp" class="form-text text-muted">Ayúda a tus clientes a ubicarte.</small> -->
                                             </div>
                                         </div>
                                         
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1"><strong>Correo electrónico del negocio *</strong></label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ejemplo: info@thecupcakesstore.com">
-                                                <!-- <small id="emailHelp" class="form-text text-muted">Ayúda a tus clientes a ubicarte.</small> -->
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col col-lg-6">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1"><strong>Número de Whatsapp *</strong></label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Ejemplo: 311 000 0000">
-                                                <small id="emailHelp" class="form-text text-muted">A este número llegarán los pedidos que tus clientes realicen.</small>
+                                            <div class="form-group" id="panel8">
+                                                <label for="celularTienda"><strong>Número de Whatsapp *</strong></label>
+                                                <input type="text" class="form-control" id="celularTienda" name="celularTienda" aria-describedby="emailHelp" placeholder="Ejemplo: 311 000 0000">
+                                                <small id="emailHelp" class="form-text text-muted">A este número llegarán los pedidos que tus clientes realicen. No incluir el +57</small>
                                             </div> 
                                         </div>
                                         
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1"><strong>Url de tu tienda *</strong></label>
+                                            <div class="form-group"  id="panel9">
+                                                <label for="urlAmigable"><strong>Url de tu tienda *</strong></label>
                                                 <div class="row">
                                                     <div class="col col-lg-7" style="padding-top:8px">
                                                         https://www.pedidoscolombia.com/tiendas/
                                                     </div>
                                                     <div class="col col-lg-5">
-                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="theCupcakesStore">
+                                                        <input type="text" class="form-control" id="urlAmigable" name="urlAmigable" aria-describedby="emailHelp" placeholder="theCupcakesStore">
                                                     </div>
                                                 </div>
                                                 <small  id="emailHelp" class="form-text text-muted">Esta es la url a la que accederean tus clientes.</small>
@@ -205,27 +194,63 @@ $claseColor = 'info';
                                 </div>
                                 <!--fin del form de datos de la página-->
 
-                                 <!-- pestana datos logo-->
-                                 <div  id="datosLogoTab">
-                                    <h2 class="tituloCatalogo">2. Logo y banner</h2>
-                                    La siguiente sección es para parametrizar el logo y el banner que darán vida a tu página web.<br><br>
+                                <div id="redesSocialesTienda">
+                                <h2 class="tituloCatalogo">2. Redes sociales (No obligatorias)</h2>
+                                    Escríbe la URL de las redes sociales que tengas para tu negocio, si aún no tienes no te preocupes, las puedes poner más adelante.<br><br>
                                     <div class="row">
                                         <div class="col col-lg-6">
-                                            <label for="banner"><strong>Logo del negocio *</strong></label>
+                                            <div class="form-group" id="panel1">
+                                                <label for="urlFacebook"><strong><i class="fa fa-facebook"></i> Facebook</strong></label>
+                                                <input type="text" class="form-control" id="urlFacebook" name="urlFacebook"  placeholder="Ejemplo: http://www.facebook.com/miBellaTienda">
+                                                <small id="emailHelp" class="form-text text-muted">Debes poner la URL completa de la red social, incluido el https://.</small>
+                                            </div>
+                                        </div>
+                                        <div class="col col-lg-6">
+                                            <div class="form-group" id="panel1">
+                                                <label for="urlInstagram"><strong><i class="fa fa-instagram"></i> Instagram</strong></label>
+                                                <input type="text" class="form-control" id="urlInstagram" name="urlInstagram"  placeholder="Ejemplo: http://www.instagram.com/miBellaTienda">
+                                                <small id="emailHelp" class="form-text text-muted">Debes poner la URL completa de la red social, incluido el https://.</small>
+                                            </div>
+                                        </div>
+                                        <div class="col col-lg-6">
+                                            <div class="form-group" id="panel1">
+                                                <label for="urlLinkedin"><strong><i class="fa fa-linkedin"></i> Linkedin</strong></label>
+                                                <input type="text" class="form-control" id="urlLinkedin" name="urlLinkedin"  placeholder="Ejemplo: http://www.linkedin.com/miBellaTienda">
+                                                <small id="emailHelp" class="form-text text-muted">Debes poner la URL completa de la red social, incluido el https://.</small>
+                                            </div>
+                                        </div>
+                                        <div class="col col-lg-6">
+                                            <div class="form-group" id="panel1">
+                                                <label for="urlTwitter"><strong><i class="fa fa-twitter"></i> Twitter</strong></label>
+                                                <input type="text" class="form-control" id="urlTwitter" name="urlTwitter"  placeholder="Ejemplo: http://www.twitter.com/miBellaTienda">
+                                                <small id="emailHelp" class="form-text text-muted">Debes poner la URL completa de la red social, incluido el https://.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                 <!-- pestana datos logo-->
+                                 <div  id="datosLogoTab">
+                                    <h2 class="tituloCatalogo">3. Logo y banner (Obligatorio)</h2>
+                                    La siguiente sección es para parametrizar el logo y el banner que darán vida a tu página web.<br><br>
+                                    <div class="row">
+                                        <div class="col col-lg-6" id="panelLogo">
+                                            <label for="logoTienda"><strong>Logo del negocio *</strong></label>
                                             <div class="file-field">
                                                 <div class="btn btn-primary btn-sm float-left">
                                                     <span>Selecciona el archivo</span>
-                                                    <input type="file" name="logo">
+                                                    <input type="file" name="logoTienda" id="logoTienda">
                                                 </div>
                                             </div><br><br>
                                             <small id="emailHelp" class="form-text text-muted">El logo debe ser en formato cuadrado máximo de 800px X 800px.</small> 
                                         </div>
                                         <div class="col col-lg-6">
-                                            <label for="banner"><strong>Banner superior *</strong></label>
+                                            <label for="bannerTienda"><strong>Banner superior</strong></label>
                                             <div class="file-field">
                                                 <div class="btn btn-primary btn-sm float-left">
                                                     <span>Selecciona el archivo</span>
-                                                    <input type="file" name="logo">
+                                                    <input type="file" name="bannerTienda" id="bannerTienda">
                                                 </div>
                                             </div><br><br>
                                             <small id="emailHelp" class="form-text text-muted">Este banner se mostrará en la parte inicial de la página. Tamaño 1024 X 768px.</small> 
@@ -236,39 +261,55 @@ $claseColor = 'info';
 
                                  <!-- pestana datos contacto-->
                                  <div  id="datosContactoTab">
-                                    <h2 class="tituloCatalogo">3. Información del dueño o encargado del negocio</h2>
+                                    <h2 class="tituloCatalogo">4. Información del dueño o encargado del negocio  (Obligatorio)</h2>
                                     Esta información no será compartida con ningún cliente, solo se usa para temas de registro y creación de la tienda.<br><br>
                                     <div class="row">
 
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
-                                                <label for="file"><strong>Nombres*</strong></label>
-                                                <input type="text" class="form-control" id="file" name="logo" placeholder="Ejemplo: Jhon">
+                                            <div class="form-group" id="panel10">
+                                                <label for="nombre"><strong>Nombres*</strong></label>
+                                                <input type="text" style="text-transform:capitalize" class="form-control" id="nombre" name="nombre" placeholder="Ejemplo: Jhon">
                                                 <!-- <small id="emailHelp" class="form-text text-muted">El logo debe ser en formato cuadrado máximo de 800px X 800px.</small>  -->
                                             </div>
                                         </div>
 
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
-                                                <label for="file"><strong>Apellidos*</strong></label>
-                                                <input type="text" class="form-control" id="file" name="logo" placeholder="Ejemplo: Puerto">
+                                            <div class="form-group" id="pane11">
+                                                <label for="apellido"><strong>Apellidos*</strong></label>
+                                                <input type="text" style="text-transform:capitalize" class="form-control" id="apellido" name="apellido" placeholder="Ejemplo: Puerto">
                                                 <!-- <small id="emailHelp" class="form-text text-muted">El logo debe ser en formato cuadrado máximo de 800px X 800px.</small>  -->
                                             </div>
                                         </div>
 
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
-                                                <label for="file"><strong>Correo electrónico*</strong></label>
-                                                <input type="text" class="form-control" id="file" name="logo" placeholder="Ejemplo: micorreopersonal@gmail.com">
+                                            <div class="form-group" id="panel12">
+                                                <label for="email"><strong>Correo electrónico*</strong></label>
+                                                <input type="text" class="form-control" id="email" name="email" placeholder="Ejemplo: micorreopersonal@gmail.com">
                                                 <small id="emailHelp" class="form-text text-muted">Por medio de este email te contactaremos y con el podrás ingresar a la zona administrativa.</small> 
                                             </div>
                                         </div>
 
                                         <div class="col col-lg-6">
-                                            <div class="form-group">
-                                                <label for="file"><strong>Número de celular*</strong></label>
-                                                <input type="text" class="form-control" id="file" name="logo" placeholder="Ejemplo: micorreopersonal@gmail.com">
-                                                <small id="emailHelp" class="form-text text-muted">Por si necesitamos contactarte.</small> 
+                                            <div class="form-group" id="panel13">
+                                                <label for="celular"><strong>Número de celular</strong></label>
+                                                <input type="text" class="form-control" id="celular" name="celular" placeholder="Ejemplo: 311 456 7890">
+                                                <small id="emailHelp" class="form-text text-muted">Este será tu usuario para el acceso administrativo.</small> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col col-lg-6">
+                                            <div class="form-group" id="panel14">
+                                                <label for="clave"><strong>Contraseña de acceso</strong></label>
+                                                <input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña para tu cuenta en pedidos colombia">
+                                                <small id="emailHelp" class="form-text text-muted">No reveles este dato nadie.</small> 
+                                            </div>
+                                        </div>
+
+                                        <div class="col col-lg-6">
+                                            <div class="form-group" id="panel15">
+                                                <label for="rclave"><strong>Repetir contraseña de acceso</strong></label>
+                                                <input type="password" class="form-control" id="rclave" name="rclave" placeholder="Repite la contraseña">
+                                                <small id="emailHelp" class="form-text text-muted">No reveles este dato nadie.</small> 
                                             </div>
                                         </div>
 
@@ -332,6 +373,7 @@ $claseColor = 'info';
   <script src="<?php echo base_url()?>/res/js/app.js?<?php echo rand(0,1000)?>" type="text/javascript"></script>
   <script type="text/javascript" src="<?php echo base_url()?>res/js/factory.js?<?php echo rand(0,10000)?>"></script>
   <script type="text/javascript" src="<?php echo base_url()?>res/js/home/paginaController.js?<?php echo rand(0,10000)?>"></script>
+  <script type="text/javascript" src="<?php echo base_url()?>res/js/home/crearController.js?<?php echo rand(0,10000)?>"></script>
   
 
   <script src="<?php echo base_url()?>/assets/js/tienda.js?<?php echo rand(0,1000)?>" type="text/javascript"></script>

@@ -55,3 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['tiendas/(:any)'] = 'Inicio/tiendas/$1';
 $route['crearTienda'] = 'Inicio/crearTienda/';
+$route['registroExitoso/(:any)'] = 'Inicio/registroExitoso/$1';
+
+
+//$route['panelAdministrativo'] = 'App/Login';

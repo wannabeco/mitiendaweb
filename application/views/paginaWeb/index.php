@@ -7,7 +7,7 @@ $claseColor = 'info';
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url()?>/assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="<?php echo base_url()?>assets/uploads/files/<?php echo $infoTienda['logoTienda'] ?>">
+  <link rel="icon" type="image/png" href="<?php echo base_url()?>assets/uploads/files/<?php echo $infoTienda['idTienda'] ?>/<?php echo $infoTienda['logoTienda'] ?>">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     <?php echo $infoTienda['nombreTienda'] ?>
@@ -322,12 +322,12 @@ $claseColor = 'info';
         </div>
         </div>
     </nav>
-    <div class="page-header header-filter clear-filter purple-filter" data-parallax="true" style="background-image: url('<?php echo base_url()?>/assets/uploads/files/<?php echo $infoTienda['bannerTienda'] ?>');">
+    <div class="page-header header-filter clear-filter purple-filter" data-parallax="true" style="background-image: url('<?php echo base_url()?>/assets/uploads/files/<?php echo $infoTienda['idTienda'] ?>/<?php echo $infoTienda['bannerTienda'] ?>');">
         <div class="container">
         <div class="row">
             <div class="col-lg-2 text-center">
                 <div class="profile-photo-small">
-                    <img src="<?php echo base_url()?>assets/uploads/files/<?php echo $infoTienda['logoTienda'] ?>" alt="Circle Image" class="rounded-circle logo">
+                    <img src="<?php echo base_url()?>assets/uploads/files/<?php echo $infoTienda['idTienda'] ?>/<?php echo $infoTienda['logoTienda'] ?>" alt="Circle Image" class="rounded-circle logo">
                 </div>
             </div>
             <div class="col-lg-10">

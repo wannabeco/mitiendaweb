@@ -307,6 +307,20 @@ function sumaDias($fechaSuma,$dias)
     date_add($fecha, date_interval_create_from_date_string($dias.' days'));
     return date_format($fecha, 'Y-m-d H:i:s');
 }
+function sumaMeses($date,$mes,$formato=1,$opera='+')
+{
+	//$date = date('d/m/Y');
+	$newDate = strtotime ( "$opera".$mes.' month' , strtotime ( $date ) ) ;
+	if($formato == 1)
+	{
+		$newDate = date ('d/m/Y', $newDate );
+	}
+	else
+	{
+		$newDate = date ('Y-m-d H:i:s', $newDate );
+	}
+	return $newDate;
+}
 
 
 function restaDias($fechaResta,$dias)
