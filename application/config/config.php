@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'https://www.pedidoscolombia.com/';
+$config['base_url']	= 'http://localhost/miTiendaWeb/';
 //$config['base_url']	= 'http://prueba.tiendaweb.com/';
 //$config['base_url']	= 'http://192.168.0.20/tucomunidad/';
 

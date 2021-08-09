@@ -1,10 +1,9 @@
-application/cache/
-assets/
-application/logs/
+application/cache/**
+application/logs/**
 res/pdf/**
-res/cargasExcel/
-application/config/
+assets/**
+res/cargasExcel/**
+application/config/**
 *.DS_STORE
 *.csv
 res/CajaMenuda/**
-.htaccess
