@@ -1,7 +1,8 @@
 application/cache/**
 application/logs/**
 res/pdf/**
-assets/**
+res/fotos/**
+assets/uploads/files/**
 res/cargasExcel/**
 application/config/**
 *.DS_STORE

@@ -164,7 +164,7 @@
                         <div  class="col col-lg-6">
                           <div class="form-group  label-floating">
                               <label class="control-label" for="email">Correo electrónico</label>
-                                <input autocomplete="off" id="email" name="email"  class="form-control" value="<?php echo (isset($datos['email']))?$datos['email']:''; ?>" type="text">
+                                <input autocomplete="off" id="email" name="email" readonly class="form-control" value="<?php echo (isset($datos['email']))?$datos['email']:''; ?>" type="text">
                                 <p class="help-block">Este dato será el usuario de inicio de sesión</p>
                           </div>
                           <input id="idUsuario" name="idUsuario"  class="form-control" value="<?php echo (isset($datos['idPersona']))?$datos['idPersona']:''; ?>" type="hidden">
